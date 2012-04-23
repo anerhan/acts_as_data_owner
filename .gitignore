@@ -1,0 +1,11 @@
+.idea
+.bundle
+spec/rails
+Gemfile.lock
+Gemfile-*.lock
+capybara*
+test-rails*
+public
+.rvmrc
+.rspec
+.rails-version
