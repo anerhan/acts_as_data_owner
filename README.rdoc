@@ -1,0 +1,8 @@
+= Acts As Data Owner
+
+
+
+
+== Copyright
+
+Copyright (c) 2012 Belorusov DmitriyWorldAlias Corporation. See LICENSE for details.
