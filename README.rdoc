@@ -6,16 +6,16 @@ Add in Functionality relations for
 Your Gemfile:
  gem 'acts_as_data_owner', :git=>"git://github.com/anerhan/acts_as_data_owner.git"
 
-*In Migration* (Adding creator_id, updater_id, owner_id and indexes for table :table_name):
+<tt>In Migration</tt> (Adding creator_id, updater_id, owner_id and indexes for table :table_name):
   acts_as_data_owner_for :table_name, :exclude(:include) => :company
 
-*In Model*:
+<tt>In Model</tt>:
  class ModelName < ActiveRecord::Base
    acts_as_data_owner
    ...
  end
 
-Use method *current* in All Application:
+Use method <tt>current</tt> in All Application:
  ModelName.current.find(params[:id])...
 
 == Copyright
