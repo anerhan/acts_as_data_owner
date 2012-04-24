@@ -1,6 +1,6 @@
 = Acts As Data Owner
 Add in Functionality relations for
-[owner,creator,updater,company]
+<b>owner,creator,updater,company</b>
 
 == Getting Started
 <b>Your Gemfile:</b>
