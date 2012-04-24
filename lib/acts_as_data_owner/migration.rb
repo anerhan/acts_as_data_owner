@@ -3,7 +3,8 @@ module ActiveRecord
 
     def acts_as_data_owner_for(table_name, *args)
       options = args.extract_options!
-      fields = [:company, :creator, :owner, :updater]
+      fields  = [:creator, :owner, :updater]
+      fields += [options[:include]].flatten if options[:include]
       fields -= [options[:exclude]].flatten if options[:exclude]
 
       #Add fields to table
