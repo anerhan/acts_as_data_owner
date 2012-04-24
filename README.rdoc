@@ -10,10 +10,12 @@ Add in Functionality relations for
   acts_as_data_owner_for :table_name, :exclude(:include) => :company
 
 [In Model:]
+<code>
  class ModelName < ActiveRecord::Base
    acts_as_data_owner
    ...
  end
+ </code>
 
 Use method [current] in All Application:
  ModelName.current.find(params[:id])...
