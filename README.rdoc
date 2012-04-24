@@ -3,13 +3,13 @@ Add in Functionality relations for
 [owner,creator,updater,company]
 
 == Getting Started
-<strong>Your Gemfile:</strong>
+<b>Your Gemfile:</b>
  gem 'acts_as_data_owner', :git=>"git://github.com/anerhan/acts_as_data_owner.git"
 
-<strong>In Migration (Adding creator_id, updater_id, owner_id and indexes for table :table_name):</strong>
+<b>In Migration (Adding creator_id, updater_id, owner_id and indexes for table :table_name):</b>
   acts_as_data_owner_for :table_name, :exclude(:include) => :company
 
-<strong>In Model:</strong>
+<b>In Model:</b>
 
  class ModelName < ActiveRecord::Base
    acts_as_data_owner
@@ -17,7 +17,7 @@ Add in Functionality relations for
  end
 
 
-<strong>Use method "current" in All Application:</strong>
+<b>Use method "current" in All Application:</b>
  ModelName.current.find(params[:id])...
 
 == Copyright
