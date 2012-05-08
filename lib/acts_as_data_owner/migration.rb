@@ -6,7 +6,7 @@ module ActiveRecord
       fields  = [:creator, :owner, :updater]
       fields += [options[:include]].flatten if options[:include]
       fields -= [options[:exclude]].flatten if options[:exclude]
-
+      prefix  = options[:prefix]            if options[:prefix]
       #Add fields to table
       change_table table_name do |t|
         fields.each do |f|
@@ -16,7 +16,7 @@ module ActiveRecord
 
       #Add indexes
       fields.each do |f|
-        add_index table_name, "#{f}_id"
+        add_index table_name, "#{f}_id",:name=>(prefix ? "#{prefix}_#{f}" : "index_#{table_name}_on_#{f}" )
       end
     end
 
