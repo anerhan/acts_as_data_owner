@@ -1,6 +1,6 @@
 module ActiveRecord
-  class Migration
 
+  class Migration
     def acts_as_data_owner_for(table_name, *args)
       options = args.extract_options!
       fields  = [:creator, :owner, :updater]
@@ -19,6 +19,8 @@ module ActiveRecord
         add_index table_name, "#{f}_id",:name=>(prefix ? "#{prefix}_#{f}" : "index_#{table_name}_on_#{f}" )
       end
     end
+
+    alias_method :data_owner, :acts_as_data_owner_for
 
   end
 end
