@@ -37,6 +37,8 @@ module ActsAsDataOwner
     include InstanceMethods
   end
 
+  alias_method :data_owner, :acts_as_data_owner
+
   module InstanceMethods
     private
 
