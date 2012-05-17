@@ -43,7 +43,7 @@ Add in Functionality relations for
 <b>Add in controller Setter:</b>
 
  class ApplicationController < ActionController::Base
- git gi
+
   #Set current Person for all Interface
   before_filter :set_current_person_and_company
 
