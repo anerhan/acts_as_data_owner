@@ -1,5 +1,8 @@
 # -*- encoding: utf-8 -*-
+
+
 module ActsAsDataOwner
+
 
   def acts_as_data_owner(*args)
 
@@ -22,13 +25,18 @@ module ActsAsDataOwner
     before_update :set_updater
 
     scope :current, lambda {
+      conditions = {}
       #Filter by User Ids Who has access to Products
       if !Person.current.is_admin?
-        conditions = {}
-        conditions["#{self.table_name}.creator_id"] = ([Person.current.id] + Person.manage_people_ids).compact if fields.include?(:creator)
-        conditions["#{self.table_name}.company_id"] = ([(Person.current.current_company ? Person.current.current_company.id : nil)] + Person.manage_company_ids).compact if fields.include?(:company)
-        where(conditions)
+
+        conditions["#{self.table_name}.owner_id"] = ([Person.current.id] + Person.manage_people_ids).compact if fields.include?(:owner)
+
+        if fields.include?(:company)
+          company_ids = ([(Person.current.current_company ? Person.current.current_company.id : nil)] + Person.manage_company_ids).compact
+          conditions["#{self.table_name}.company_id"] = company_ids if company_ids.any?
+        end
       end
+      where(conditions)
     }
 
 

@@ -6,8 +6,63 @@ Add in Functionality relations for
 <b>Your Gemfile:</b>
  gem 'acts_as_data_owner', :git=>"git://github.com/anerhan/acts_as_data_owner.git"
 
+<b>Create ActiveRecord Model with next content:</b>
+
+  class Person < ActiveRecord::Base
+    #Set Current Person
+    def self.current=(person)
+      @current_people = person
+    end
+
+    #Get Current Person
+    def self.current
+      @current_people
+    end
+    #Set Current Company
+    def current_company=(company)
+      @current_company = company
+    end
+    #Get Current Person
+    def current_company
+      @current_company
+    end
+
+    #May Returns Ids for manage other People
+    def self.manage_people_ids
+      [Person.current.id]
+    end
+
+    #May Returns Companies Ids for manage other Companies
+    def self.manage_company_ids
+      [nil] #[Person.current.company_id]
+    end
+
+  end
+
+
+<b>Add in controller Setter:</b>
+
+class ApplicationController < ActionController::Base
+
+ #Set current Person for all Interface
+ before_filter :set_current_person_and_company
+
+ private
+
+  def set_current_person_and_company
+    #TODO: Need change this methods for yourself
+    Person.current = Person.find_by_login_and_password("Vasily", "password")
+    Company.current_company = Person.current.company #Or Other method
+  end
+
+end
+
+
 <b>In Migration (Adding creator_id, updater_id, owner_id and indexes for table :table_name):</b>
+
   acts_as_data_owner_for :table_name, :exclude(:include) => :company
+  or
+  data_owner :table_name, :exclude(:include) => :company
 
 <b>In Model:</b>
 
@@ -15,6 +70,13 @@ Add in Functionality relations for
    acts_as_data_owner
    ...
  end
+
+ Or
+
+ class ModelName < ActiveRecord::Base
+    data_owner
+    ...
+  end
 
 
 <b>Use method "current" in All Application:</b>
