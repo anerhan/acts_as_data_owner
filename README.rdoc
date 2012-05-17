@@ -42,18 +42,20 @@ Add in Functionality relations for
 
 <b>Add in controller Setter:</b>
 
-class ApplicationController < ActionController::Base
- #Set current Person for all Interface
- before_filter :set_current_person_and_company
+ class ApplicationController < ActionController::Base
+ git gi
+  #Set current Person for all Interface
+  before_filter :set_current_person_and_company
 
- private
+  private
 
-  def set_current_person_and_company
+   def set_current_person_and_company
     #TODO: Need change this methods for yourself
     Person.current = Person.find_by_login_and_password("Vasily", "password")
     Company.current_company = Person.current.company #Or Other method
-  end
-end
+   end
+
+ end
 
 
 <b>In Migration (Adding creator_id, updater_id, owner_id and indexes for table :table_name):</b>
