@@ -15,14 +15,14 @@ module ActsAsDataOwner
 
     (fields-[:company]).each do |f|
       belongs_to f, :class_name => "Person", :foreign_key => "#{f}_id"
+      before_create :"set_#{f}"
     end
 
     if fields.include?(:company)
       belongs_to :company
       before_create :set_company
     end
-    before_create :set_creator_and_owner
-    before_update :set_updater
+
 
     scope :current, lambda {
       conditions = {}
@@ -54,8 +54,11 @@ module ActsAsDataOwner
       self.company = Person.current.company
     end
 
-    def set_creator_and_owner
+    def set_creator
       self.creator = Person.current
+    end
+
+    def set_owner
       self.owner = Person.current
     end
 
