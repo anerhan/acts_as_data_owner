@@ -39,6 +39,19 @@ module ActsAsDataOwner
       where(conditions)
     }
 
+    scope :personal, lambda {
+      conditions = {}
+      #Filter by User Ids Who has access to Products
+        conditions["#{self.table_name}.owner_id"] = ([Person.current.id] + Person.manage_people_ids).compact if fields.include?(:owner)
+
+        if fields.include?(:company)
+          company_ids = ([(Person.current.current_company ? Person.current.current_company.id : nil)] + Person.manage_company_ids).compact
+          conditions["#{self.table_name}.company_id"] = company_ids if company_ids.any?
+        end
+
+      where(conditions)
+    }
+
 
     #has_paper_trail(:meta => {:person_id => Proc.new { |p| (p.updater_id || p.creator_id) }})
 
